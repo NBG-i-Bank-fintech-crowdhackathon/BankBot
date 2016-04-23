@@ -14,7 +14,7 @@ def handle_message()
 		answer_new('I will help you')
 	elsif  apiresponce[:result][:action]=='nearest_ATM' then
 		answer_new('phgaine mesolongi')
-	elsif self.user.pin then
+	elsif not self.user.pin.blank? then
 		if apiresponce[:result][:action]=='smalltalk.greetings' then
 			send_structured_message
 		elsif apiresponce[:result][:action]=='account_balance' then
