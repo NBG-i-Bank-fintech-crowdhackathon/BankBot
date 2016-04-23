@@ -10,8 +10,8 @@ def handle_message()
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
 	apiresponce = client.text_request text, :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
-	if apiresponce[:result][:speech]!='' then
-		answer_new(apiresponce[:result][:speech])
+	if apiresponce[:result][:action]=='smalltalk.greetings' then
+		send_structured_message
 	elsif apiresponce[:result][:action]=='account_balance' then
 		answer_new('Your balance is 500$')
 	elsif apiresponce[:result][:action]=='help' then
@@ -25,6 +25,8 @@ def handle_message()
 		answer_new('phgaine mesolongi')
 	elsif apiresponce[:result][:action]=='phone_assistance' then
 		answer_new('I will call you')
+	elsif apiresponce[:result][:speech]!='' then
+		answer_new(apiresponce[:result][:speech])
 	end		
 			
 	# self.user.messages.create(:text=>apiresponce[:result][:speech],:response=>true).send_message
@@ -49,6 +51,22 @@ def answer_new(text)
 	self.user.messages.create(:text=>text,:response=>true).send_message
 end
 
+def send_structured_message()
+	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
+  		faraday.request  :url_encoded             # form-encode POST params
+  		faraday.response :logger                  # log requests to STDOUT
+  		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+	end
+
+	conn.post do |req|
+		req.url '/me/messages?access_token=' + @@fb_token
+		req.headers['Content-Type'] = 'application/json'
+		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"yolo\",\"buttons\":[{\"type\":\"postback\",\"title\":\"Start Chatting\",\"payload\":\"hello\"}]}} } }"
+	end
+	puts "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"yolo\",\"buttons\":[{\"type\":\"postback\",\"title\":\"Start Chatting\",\"payload\":\"USER_DEFINED_PAYLOAD\"}]}} } }"
+end
+
+
 def send_message()
 	
 	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
@@ -62,7 +80,6 @@ def send_message()
 		req.headers['Content-Type'] = 'application/json'
 		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"text\" : \"#{self.text}\" } }"
 	end
-#puts "{ \"recipient\": { \"id\" : \"#{user}\" }, \"message\": { \"text\" : \"#{message}\" } }"
 end
 
 end
