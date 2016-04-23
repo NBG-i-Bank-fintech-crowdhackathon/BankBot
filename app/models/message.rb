@@ -61,7 +61,7 @@ def send_structured_message()
 	conn.post do |req|
 		req.url '/me/messages?access_token=' + @@fb_token
 		req.headers['Content-Type'] = 'application/json'
-		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"buttons\":[{\"type\":\"postback\",\"title\":\"Start Chatting\",\"payload\":\"USER_DEFINED_PAYLOAD\"}]}} } }"
+		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"yolo\",\"buttons\":[{\"type\":\"postback\",\"title\":\"Start Chatting\",\"payload\":\"USER_DEFINED_PAYLOAD\"}]}} } }"
 	end
 	puts "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"yolo\",\"buttons\":[{\"type\":\"postback\",\"title\":\"Start Chatting\",\"payload\":\"USER_DEFINED_PAYLOAD\"}]}} } }"
 end
