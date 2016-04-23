@@ -30,7 +30,7 @@ def handle_message()
 
 end
 
-def hanle_sound()
+def handle_sound()
 	answer_new('sound')
 end
 
