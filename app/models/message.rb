@@ -72,7 +72,7 @@ def send_begin()
 		req.headers['Content-Type'] = 'application/json'
 		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Authenticate with NBG\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
 	end
-	puts "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Authenticate with NBG\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
+	puts "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Please authenticate with NBG first.\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
 end
 
 def send_info()
