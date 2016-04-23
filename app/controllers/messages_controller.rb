@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery :except => [:handle_message]
 
   def webhook
     if params[:'hub.verify_token'] == 'mglmdsls$432snsbbskk515616adas63432'
