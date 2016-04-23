@@ -38,10 +38,11 @@ def handle_sound()
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
 	filename = self.user.fb_id+Time.now.getutc.to_s
-	open(filename, 'wb') do |file|
+	filesaved = open(filename, 'wb') do |file|
 	  file << open(text).read
 	end
-	apiresponce = client.voice_request file , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+	apiresponce = client.voice_request filesaved , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+	puts filesaved
 	puts apiresponce
 	File.delete(filename) if File.exist?(filename)
 end
