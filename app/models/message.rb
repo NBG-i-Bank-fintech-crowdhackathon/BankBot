@@ -11,7 +11,7 @@ def handle_message()
 		)
 	apiresponce = client.text_request text, :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
 	if apiresponce[:result][:action]=='smalltalk.greetings' then
-
+		send_structured_message
 	elsif apiresponce[:result][:action]=='account_balance' then
 		answer_new('Your balance is 500$')
 	elsif apiresponce[:result][:action]=='help' then
