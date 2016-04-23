@@ -1,22 +1,24 @@
 
+
     <div class="container">
       <div class="row">
       <center><img style="height:150px;" src="http://mikrometoxos.gr/wp-content/uploads/2015/03/NBG_logos_GR_color.jpg"></center>
-      <form class="form-signin" action="/select_pin">
-        <center><h2 class="form-signin-heading">Please Authenticate with NBG API</h2></center>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+      <center><h2 class="form-signin-heading">Please Authenticate with NBG API</h2></center>
+      <%= form_tag("/select_pin", method: "post", class: "form-signin") do %>
+        <%= label_tag(:email, "Email address:", :class => 'sr-only') %>
+        <%= email_field(:user, :email, :placeholder => "Email", :class => 'form-control') %>
+        <%= label_tag(:password, "Password:", :class => 'sr-only') %>
+        <%= password_field_tag(:password, "", :placeholder => "Password", :class => 'form-control') %>
+        <%= hidden_field_tag(:uid, params[:uid] ) %>
+        <br/>
+        <%= submit_tag("Authenticate", :class => 'btn btn-lg btn-primary btn-block') %>
+      <% end %>
       </div>
     </div> <!-- /container -->
+
+
+
+
 
 
 
