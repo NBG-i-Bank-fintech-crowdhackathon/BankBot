@@ -13,6 +13,7 @@ class UsersController < ApplicationController
       render 'success_auth'
     else
       render plain: "Error"
+    end
   end
   # GET /users
   # GET /users.json
