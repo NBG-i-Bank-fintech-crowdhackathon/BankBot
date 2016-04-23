@@ -5,8 +5,8 @@
       <center><img style="height:150px;" src="http://mikrometoxos.gr/wp-content/uploads/2015/03/NBG_logos_GR_color.jpg"></center>
       <center><h2 class="form-signin-heading">Please Authenticate with NBG API</h2></center>
       <%= form_tag("/select_pin", method: "post", class: "form-signin") do %>
-        <%= label_tag(:email, "Email address:", "demo@demo.com" :class => 'sr-only') %>
-        <%= email_field(:user, :email, :placeholder => "Email", :class => 'form-control') %>
+        <%= label_tag(:email, "Email address:",  :class => 'sr-only') %>
+        <%= email_field(:user, :email,"demo@demo.com", :placeholder => "Email", :class => 'form-control') %>
         <%= label_tag(:password, "Password:", :class => 'sr-only') %>
         <%= password_field_tag(:password, "demo", :placeholder => "Password", :class => 'form-control') %>
         <%= hidden_field_tag(:uid, params[:uid] ) %>
