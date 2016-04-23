@@ -30,6 +30,8 @@ class MessagesController < ApplicationController
               current_user.messages.create(:text => attach[:payload][:url], :response => false).handle_sound()
             end
           end
+        elsif message[:postback]
+          current_user.messages.create(:text => message[:postback][:payload], :response => false).handle_message()         
         end
       end
     end
