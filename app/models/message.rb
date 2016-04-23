@@ -43,7 +43,7 @@ def handle_sound()
 	end
 	file = File.new filename
 	puts filename
-	apiresponce = client.voice_request file , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+	apiresponce = client.voice_request file 
 
 	puts apiresponce
 	File.delete(filename) if File.exist?(filename)
