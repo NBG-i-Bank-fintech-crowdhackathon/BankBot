@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   def authenticate
     render 'auth'
   end
+  def select_pin
+    render 'pin'
+  end
   # GET /users
   # GET /users.json
   def index
