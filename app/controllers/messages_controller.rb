@@ -18,8 +18,8 @@ class MessagesController < ApplicationController
     params[:entry].each do |entry|
       entry[:messaging].each do |message|
 
-        user = User.find_by(:fb_id => message[:sender][:id])
-        if user.blank? then
+        current_user = User.find_by(:fb_id => message[:sender][:id])
+        if current_user.blank? then
           current_user = User.create_from_fb(message[:sender][:id].to_s) 
         end
 
