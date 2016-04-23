@@ -9,11 +9,8 @@ class UsersController < ApplicationController
   end
   def set_pin
     u = User.find(params[:uid])
-    if(u.update(pin: params[:pin])) then
-      render 'success_auth'
-    else
-      render plain: "Error"
-    end
+    u.update(pin: params[:pin])
+    u.save
   end
   # GET /users
   # GET /users.json
