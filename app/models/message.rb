@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'pocketsphinx-ruby'
 
 class Message < ActiveRecord::Base
 	belongs_to :user
