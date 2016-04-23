@@ -7,7 +7,7 @@ def handle_message()
 		:client_access_token => @@ai_token,
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY',
 		)
-	self.send_message( "Hi" )
+	self.send_message()
 	#puts responce[:result].inspect.gsub('"',"'")
 
 end
