@@ -5,9 +5,11 @@ class Message < ActiveRecord::Base
 def handle_message()
 	client = ApiAiRuby::Client.new(
 		:client_access_token => @@ai_token,
-		:subscription_key => 'YOUR_SUBSCRIPTION_KEY',
+		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
-	self.send_message()
+	apiresponce = client.text_request text, :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+
+	self.user.messages.create(:text=>apiresponce[:result][:speech],:responce=>true).send_message
 	#puts responce[:result].inspect.gsub('"',"'")
 
 end
