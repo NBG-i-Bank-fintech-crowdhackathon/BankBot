@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     u = User.find(params[:uid])
     u.update(pin: params[:pin])
     u.save
+    render 'success_auth'
   end
   # GET /users
   # GET /users.json
