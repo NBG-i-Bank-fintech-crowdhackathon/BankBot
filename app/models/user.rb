@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
       		faraday.response :logger                  # log requests to STDOUT
       		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
     	end
-    	profile = conn.get "/#{fb_id}?access_token=#{config.ai_token}"
+    	profile = conn.get "/#{fb_id}?access_token=#{config.fb_token}"
     	profile = JSON.parse profile.body
     	return User.create(:fb_id => fb_id, :first_name => profile["first_name"], :last_name => profile["last_name"])
 
