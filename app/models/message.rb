@@ -36,7 +36,7 @@ def handle_sound()
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
 	file = File.new text
-	apiresponce = client.voice_request text , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+	apiresponce = client.voice_request file , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
 	puts apiresponce
 end
 
