@@ -8,10 +8,30 @@ def handle_message()
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
 	apiresponce = client.text_request text, :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
-
-	self.user.messages.create(:text=>apiresponce[:result][:speech],:response=>true).send_message
+	if apiresponce[:result][:speech]!='' then
+		answer_new(apiresponce[:result][:speech])
+	elsif apiresponce[:result][:action]=='account_balance' then
+		answer_new('Your balance is 500$')
+	elsif apiresponce[:result][:action]=='help' then
+		answer_new('I will help you')
+	elsif apiresponce[:result][:action]=='last_transactions' then
+		answer_new('last transactions: klp...')
+	elsif apiresponce[:result][:action]=='lost_card' then
+		item = apiresponce[:result][:parameters][:lost_item]
+		answer_new('I will find your'+item)
+	elsif apiresponce[:result][:action]=='nearest_ATM' then
+		answer_new('phgaine mesolongi')
+	elsif apiresponce[:result][:action]=='phone_assistance' then
+		answer_new('I will call you')
+	end		
+			
+	# self.user.messages.create(:text=>apiresponce[:result][:speech],:response=>true).send_message
 	#puts responce[:result].inspect.gsub('"',"'")
 
+end
+
+def answer_new(text)
+	self.user.messages.create(:text=>text,:response=>true).send_message
 end
 
 def send_message()
