@@ -85,7 +85,7 @@ def send_info()
 	conn.post do |req|
 		req.url '/me/messages?access_token=' + @@fb_token
 		req.headers['Content-Type'] = 'application/json'
-		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"How can i help you ? \",\"buttons\":[{\"type\":\"postback\",\"title\":\" Check account balance \",\"payload\":\" account balance \"},{\"type\":\"postback\",\"title\":\"Nearest ATM ?\",\"payload\":\"ATM ?\"},{\"type\":\"postback\",\"title\":\"Last transcations \",\"payload\":\"Last transcations \"}]}} } }"
+		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"How can i help you ? \",\"buttons\":[{\"type\":\"postback\",\"title\":\"Account balance \",\"payload\":\"Account balance \"},{\"type\":\"postback\",\"title\":\"Nearest ATM ?\",\"payload\":\"ATM ?\"},{\"type\":\"postback\",\"title\":\"Last transcations \",\"payload\":\"Last transcations \"}]}} } }"
 	end
 	conn.post do |req|
 		req.url '/me/messages?access_token=' + @@fb_token
