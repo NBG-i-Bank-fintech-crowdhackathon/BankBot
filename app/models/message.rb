@@ -31,7 +31,12 @@ def handle_message()
 end
 
 def handle_sound()
-	answer_new('sound')
+	client = ApiAiRuby::Client.new(
+		:client_access_token => @@ai_token,
+		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
+		)
+	apiresponce = client.text_request text , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+	puts apiresponce
 end
 
 def answer_new(text)
