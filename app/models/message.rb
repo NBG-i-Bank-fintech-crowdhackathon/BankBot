@@ -12,7 +12,7 @@ def handle_message()
 
 end
 
-def send_message(message)
+def send_message()
 	
 	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
   		faraday.request  :url_encoded             # form-encode POST params
@@ -23,7 +23,7 @@ def send_message(message)
 	conn.post do |req|
 		req.url '/me/messages?access_token=' + @@fb_token
 		req.headers['Content-Type'] = 'application/json'
-		req.body = "{ \"recipient\": { \"id\" : \"#{user}\" }, \"message\": { \"text\" : \"#{message}\" } }"
+		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"text\" : \"#{self.text}\" } }"
 	end
 #puts "{ \"recipient\": { \"id\" : \"#{user}\" }, \"message\": { \"text\" : \"#{message}\" } }"
 end

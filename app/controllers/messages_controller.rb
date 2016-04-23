@@ -30,6 +30,8 @@ class MessagesController < ApplicationController
       end
     end
   end
+
+  
   
   # GET /messages
   # GET /messages.json
