@@ -1,6 +1,9 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   protect_from_forgery :except => [:handle_message]
+  @@fb_token = 'CAAW46Pf7Xo4BANlo4Unadya2BeLtUt3CO5hohlqPbn1ZCrLwbGwKQCdBQrjNFaWp0ilYlt1A4hBKebRuZA0Rai4R1wIfAsMdn3DG0jGoea2iU2frQbCcO25LQ9VEqtqMvdT07G8BbxEAXfBiOqy3NfP12t7rWp0gU7h6hRT9mPSqNfehST1fARJf2oXpBewLwMmuZBKdAZDZD'
+  @@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
+
 
   def webhook
     if params[:'hub.verify_token'] == 'mglmdsls$432snsbbskk515616adas63432'
