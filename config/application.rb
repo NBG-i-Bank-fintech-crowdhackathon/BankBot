@@ -22,5 +22,8 @@ module Bankbot
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    Rails.application.config.fb_token = 'CAAY9TEEFWvsBAIeOCZClJ9N5hMS3ZBm0ra4zLKClKL5qx3Nl1sZAOjAZB7wT4ChMXQ71gtVPfyWDhczPIMhPzsGv4n6dFJY71zFWGZChnjnBVArH0dDOm0ee3cktTMVzeDkPjXndeBOSx6pk5dKHa6n5DoZC8u7QEqIBe6WcJ0cnxGTIRJhKU74wWZBrpQbAOnVZBZCaVyMIcvwZDZD'
+    Rails.application.config.ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
+
   end
 end
