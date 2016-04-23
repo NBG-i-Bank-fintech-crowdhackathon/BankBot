@@ -17,8 +17,7 @@ def handle_message()
 	elsif apiresponce[:result][:action]=='last_transactions' then
 		answer_new('last transactions: klp...')
 	elsif apiresponce[:result][:action]=='lost_card' then
-		puts apiresponce[:result][:parameters]
-		item = apiresponce[:result][:parameters][:lost_item]
+		item = apiresponce[:result][:parameters][:lost_items]
 		answer_new('I will find your'+item)
 	elsif apiresponce[:result][:action]=='nearest_ATM' then
 		answer_new('phgaine mesolongi')
