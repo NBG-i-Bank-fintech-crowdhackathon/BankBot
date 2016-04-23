@@ -16,7 +16,7 @@ def handle_message()
 		answer_new('phgaine mesolongi')
 	elsif not self.user.pin.blank? then
 		if apiresponce[:result][:action]=='smalltalk.greetings' then
-			send_structured_message
+			send_info
 		elsif apiresponce[:result][:action]=='account_balance' then
 			answer_new('Your balance is 500$')
 		elsif apiresponce[:result][:action]=='last_transactions' then
