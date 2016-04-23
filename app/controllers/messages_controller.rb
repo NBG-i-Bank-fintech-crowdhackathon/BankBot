@@ -13,14 +13,16 @@ class MessagesController < ApplicationController
     render :text => params
     params[:entry].each do |entry|
       entry[:messaging].each do |message|
-        user = message[:sender][:id]
-        if(message[:message])
-          #text = message[:message][:text]
-          #current_user = user.find_by(fb_id: user)
-          #new_message = current_user.messages.create()
-          #new_message.handle_message()
-          #handle_message(user, text)
+
+        user = User.find_by(:fb_id => message[:sender][:id])
+        if user.blank? then
+          current_user = User.create_from_fb(message[:sender][:id]) 
         end
+
+        if(message[:message])
+          current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
+        end
+
       end
     end
   end
