@@ -24,14 +24,14 @@ class MessagesController < ApplicationController
         end
 
         if(message[:message])
-          current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
+          #current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
         end
 
       end
     end
   end
 
-  
+
   
   # GET /messages
   # GET /messages.json
