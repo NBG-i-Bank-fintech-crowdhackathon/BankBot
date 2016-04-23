@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'pocketsphinx-ruby'
 
 class Message < ActiveRecord::Base
 	belongs_to :user
@@ -41,11 +42,11 @@ def handle_sound()
 	open(filename, 'wb') do |file|
 	  file << open(text).read
 	end
-	file = File.new filename
-	puts filename
-	apiresponce = client.voice_request file 
-
-	puts apiresponce
+	# file = File.new filename
+	recognizer = Pocketsphinx::AudioFileSpeechRecognizer.new
+	recognizer.recognize(filename) do |speech|
+	  puts speech # => "go forward ten meters"
+	end
 	File.delete(filename) if File.exist?(filename)
 end
 
