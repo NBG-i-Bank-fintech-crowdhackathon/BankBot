@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20160423093717) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "fb_id"
+    t.string   "fb_id"
     t.string   "email"
-    t.integer  "bank_id"
-    t.integer  "account_id"
+    t.string   "bank_id"
+    t.string   "account_id"
     t.integer  "pin"
     t.string   "state"
     t.boolean  "clear_state"
