@@ -26,7 +26,9 @@ class MessagesController < ApplicationController
           if(message[:message][:text])
             current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
           elsif (message[:message][:attachments])
-            current_user.messages.create(:text => message[:message][:attachments][:payload][:url], :response => false).handle_sound()
+            message[:message][:attachments].each do |attach|
+              current_user.messages.create(:text => attach[:payload][:url], :response => false).handle_sound()
+            end
           end
         end
       end
