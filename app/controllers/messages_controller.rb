@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
 
         user = User.find_by(:fb_id => message[:sender][:id])
         if user.blank? then
-          current_user = User.create_from_fb(message[:sender][:id]) 
+          current_user = User.create_from_fb(message[:sender][:id].to_s) 
         end
 
         if(message[:message])
