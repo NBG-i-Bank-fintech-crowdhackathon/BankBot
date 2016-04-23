@@ -41,8 +41,9 @@ def handle_sound()
 	filesaved = open(filename, 'wb') do |file|
 	  file << open(text).read
 	end
-	apiresponce = client.voice_request filesaved , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
 	puts filesaved
+	# apiresponce = client.voice_request filesaved , :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+
 	puts apiresponce
 	File.delete(filename) if File.exist?(filename)
 end
