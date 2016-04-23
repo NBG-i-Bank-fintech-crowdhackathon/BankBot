@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   post 'webhook', to: 'messages#handle_message'
 
   get 'auth', to: 'users#authenticate' 
-
+  get 'select_pin', to: 'users#select_pin' 
 end

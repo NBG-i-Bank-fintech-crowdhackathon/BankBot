@@ -31,11 +31,11 @@ h6 {
 }
 
 .intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    /*padding-top: 50px;  If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url(http://ironsummitmedia.github.io/startbootstrap-landing-page/img/intro-bg.jpg) no-repeat center center;
+    color: #2c3e50;
+    background: url("http://www.masterslider.com/features/templates/ms/layers/bg3.jpg") no-repeat center center;
     background-size: cover;
 }
 
@@ -116,7 +116,7 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(http://ironsummitmedia.github.io/startbootstrap-landing-page/img/banner-bg.jpg) no-repeat center center;
+    background: url("http://www.masterslider.com/features/templates/ms/layers/bg3.jpg") no-repeat center center;
     background-size: cover;
 }
 

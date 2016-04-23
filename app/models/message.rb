@@ -45,10 +45,13 @@ def handle_sound()
 	  file << open(text).read
 	end
 	# file = File.new filename
+<<<<<<< HEAD
 	recognizer = Pocketsphinx::AudioFileSpeechRecognizer.new
 	recognizer.recognize(filename) do |speech|
 	  puts speech # => "go forward ten meters"
 	end
+=======
+>>>>>>> c695600789d68833e1d28e125b833cd52e4cc20a
 	File.delete(filename) if File.exist?(filename)
 end
 
