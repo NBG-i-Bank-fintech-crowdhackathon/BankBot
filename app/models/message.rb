@@ -30,6 +30,10 @@ def handle_message()
 
 end
 
+def hanle_sound()
+	answer_new('sound')
+end
+
 def answer_new(text)
 	self.user.messages.create(:text=>text,:response=>true).send_message
 end

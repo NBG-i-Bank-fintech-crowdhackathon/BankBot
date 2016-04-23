@@ -22,11 +22,13 @@ class MessagesController < ApplicationController
         if current_user.blank? then
           current_user = User.create_from_fb(message[:sender][:id].to_s) 
         end
-
-        if(message[:message])
-          current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
+        if message[:message]
+          if(message[:message][:text])
+            current_user.messages.create(:text => message[:message][:text], :response => false).handle_message()
+          elsif (message[:message][:attachments])
+            current_user.messages.create(:text => message[:message][:attachments][:payload][:url], :response => false).handle_sound()
+          end
         end
-
       end
     end
   end
