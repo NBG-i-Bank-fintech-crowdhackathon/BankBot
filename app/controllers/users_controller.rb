@@ -7,6 +7,11 @@ class UsersController < ApplicationController
   def select_pin
     render 'pin'
   end
+  def set_pin
+    u = User.find(params[:uid])
+    u.update(:pin => params[:pin])
+    render 'success_auth'
+  end
   # GET /users
   # GET /users.json
   def index
