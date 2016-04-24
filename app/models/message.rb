@@ -45,7 +45,16 @@ def handle_message()
 			answer_new('22/04/2016 19:43:34\ndeposit: 100.00 EUR')
 		elsif a=='pay_bills' then
 			bills = apiresponce[:result][:parameters][:bills]
-			answer_new('You payed your '+bills+' bill')		
+			answer_new("You have successfully payed your #{bills} bill")
+		elsif a=='savings' then
+			amount = apiresponce[:result][:parameters][:unit_currency][:amount]
+			currency = apiresponce[:result][:parameters][:unit_currency][:currency]
+			answer_new("You have successfully salted away #{amount} #{currency}")
+		elsif a=='savings_per_month' then
+			amount = apiresponce[:result][:parameters][:unit_currency][:amount]
+			currency = apiresponce[:result][:parameters][:unit_currency][:currency]
+			interval = apiresponce[:result][:parameters][:unit_currency][:interval]
+			answer_new("From now on you will save #{amount} #{currency} every #{interval}")
 		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
 			answer_new('I will find your '+item)
