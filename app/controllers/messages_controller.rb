@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   protect_from_forgery :except => [:handle_message]
   @@fb_token = 'CAAW46Pf7Xo4BANlo4Unadya2BeLtUt3CO5hohlqPbn1ZCrLwbGwKQCdBQrjNFaWp0ilYlt1A4hBKebRuZA0Rai4R1wIfAsMdn3DG0jGoea2iU2frQbCcO25LQ9VEqtqMvdT07G8BbxEAXfBiOqy3NfP12t7rWp0gU7h6hRT9mPSqNfehST1fARJf2oXpBewLwMmuZBKdAZDZD'
   @@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
-
+  @@nbg_token = 'f670836aa4b542588f9ea878161d5f33'
 
   def webhook
     if params[:'hub.verify_token'] == 'mglmdsls$432snsbbskk515616adas63432'
@@ -35,6 +35,31 @@ class MessagesController < ApplicationController
         end
       end
     end
+  end
+
+  def store_atms
+    conn = Faraday.new(:url => 'https://nbgdemo.azure-api.net/') do |faraday|
+          faraday.request  :url_encoded             # form-encode POST params
+          faraday.response :logger                  # log requests to STDOUT
+          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+
+      end
+
+
+    atms = conn.get do |req|
+      req.url '/nodeopenapi/api/atms/rest'
+      req.options.timeout = 5           # open/read timeout in seconds
+      req.options.open_timeout = 2      # connection open timeout in seconds
+      req.headers['Ocp-Apim-Subscription-Key'] = @@nbg_token
+      #req.body = '{ "name": "Unagi" }'
+    end
+    atms = JSON.parse atms.body
+    if atms["atms"] then
+      atms["atms"].each do |atm| 
+        Atm.create(name: atm["name"], address: atm["address"]["line_2"], lat: atm["location"]["latitude"], long: atm["location"]["longitude"])
+      end
+    end
+    render plain: "Ok"
   end
 
 

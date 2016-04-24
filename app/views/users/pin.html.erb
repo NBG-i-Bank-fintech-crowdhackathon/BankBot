@@ -4,7 +4,7 @@
       <center><img style="height:150px;" src="http://mikrometoxos.gr/wp-content/uploads/2015/03/NBG_logos_GR_color.jpg"></center>
       <%= form_tag("/set_pin", method: "post", class: "form-signin") do %>
         <%= label_tag(:pin, "Please select a pin for secure transactions:" , :class => 'sr-only') %>
-        <%= text_field_tag(:user ,"", :placeholder => "New four digit pin", :class => 'form-control') %>
+        <%= telephone_field(:user ,:pin, :placeholder => "New four digit pin", :class => 'form-control', :required => true) %>
         <%= hidden_field_tag(:uid, params[:uid] ) %>
         <br/>
         <%= submit_tag("Finish", :class => 'btn btn-lg btn-primary btn-block') %>

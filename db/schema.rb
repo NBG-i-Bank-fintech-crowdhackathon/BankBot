@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423093717) do
+ActiveRecord::Schema.define(version: 20160424074418) do
+
+  create_table "atms", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "lat"
+    t.string   "long"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.integer  "user_id"
