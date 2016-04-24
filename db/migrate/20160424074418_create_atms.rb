@@ -3,8 +3,9 @@ class CreateAtms < ActiveRecord::Migration
     create_table :atms do |t|
       t.string :name
       t.string :address
-      t.string :lat
-      t.string :long
+      t.float :lat
+      t.float :long
+      t.float :distance
 
       t.timestamps null: false
     end
