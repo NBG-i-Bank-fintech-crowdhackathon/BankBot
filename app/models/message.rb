@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
 	belongs_to :user
 	@@fb_token = 'CAAW46Pf7Xo4BANlo4Unadya2BeLtUt3CO5hohlqPbn1ZCrLwbGwKQCdBQrjNFaWp0ilYlt1A4hBKebRuZA0Rai4R1wIfAsMdn3DG0jGoea2iU2frQbCcO25LQ9VEqtqMvdT07G8BbxEAXfBiOqy3NfP12t7rWp0gU7h6hRT9mPSqNfehST1fARJf2oXpBewLwMmuZBKdAZDZD'
 	@@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
+	@@unknown_count = 0
 
 def range (min, max)
     rand * (max-min) + min
@@ -15,6 +16,15 @@ def handle_message()
 		:subscription_key => 'YOUR_SUBSCRIPTION_KEY'
 		)
 	apiresponce = client.text_request text, :contexts => [self.user.state], :sessionId => self.user.fb_id, :resetContexts => self.user.clear_state
+
+	if apiresponce[:result][:action]=='input.unknown' then
+		@@unknown_count+=1
+		if @@unknown_count>=2
+			send_info
+	else
+		@@unknown_count=0
+	end
+
 	if apiresponce[:result][:action]=='help' then
 		answer_new('I will help you')
 	elsif  apiresponce[:result][:action]=='nearest_ATM' then
