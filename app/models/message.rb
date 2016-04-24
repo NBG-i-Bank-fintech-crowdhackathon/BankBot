@@ -43,6 +43,9 @@ def handle_message()
 			answer_new('20/04/2016 23:13:13\nwithdraw: 400.00 EUR')
 			answer_new('21/04/2016 07:45:57\nwithdraw: 26.78 EUR')
 			answer_new('22/04/2016 19:43:34\ndeposit: 100.00 EUR')
+		elsif a=='pay_bills' then
+			bills = apiresponce[:result][:parameters][:bills]
+			answer_new('You payed your '+bills+' bill')		
 		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
 			answer_new('I will find your '+item)
