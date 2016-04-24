@@ -65,8 +65,8 @@ def handle_sound()
 	File.delete(filename) if File.exist?(filename)
 end
 
-def handle_location()
-	answer_new('pira location')
+def handle_location(lat, long)
+	answer_new( geo_scope(:origin => [37.792,-122.393]).first )
 end
 
 def answer_new(text)

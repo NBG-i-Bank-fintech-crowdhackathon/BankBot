@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
           elsif (message[:message][:attachments])
             message[:message][:attachments].each do |attach|
               if attach[:type] == "location" then
-                current_user.messages.create(:text => attach[:payload][:coordinates][:lat].to_s + ',' + attach[:payload][:coordinates][:long].to_s , :response => false).handle_location()
+                current_user.messages.create(:text => attach[:payload][:coordinates][:lat].to_s + ',' + attach[:payload][:coordinates][:long].to_s , :response => false).handle_location(attach[:payload][:coordinates][:lat].to_s , attach[:payload][:coordinates][:long].to_s)
               elsif attach[:type] == "audio"
                 current_user.messages.create(:text => attach[:payload][:url], :response => false).handle_sound()
               end
