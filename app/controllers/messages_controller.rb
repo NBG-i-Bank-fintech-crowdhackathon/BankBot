@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
       req.url '/nodeopenapi/api/atms/rest'
       req.options.timeout = 5           # open/read timeout in seconds
       req.options.open_timeout = 2      # connection open timeout in seconds
-      req.headers[' Ocp-Apim-Subscription-Key '] = @@nbg_token
+      req.headers['Ocp-Apim-Subscription-Key'] = @@nbg_token
       #req.body = '{ "name": "Unagi" }'
     end
     atms = JSON.parse atms.body
