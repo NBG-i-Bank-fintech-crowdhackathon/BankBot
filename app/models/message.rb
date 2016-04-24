@@ -3,7 +3,7 @@ require 'open-uri'
 class Message < ActiveRecord::Base
 	belongs_to :user
 	@@fb_token = 'CAAW46Pf7Xo4BANlo4Unadya2BeLtUt3CO5hohlqPbn1ZCrLwbGwKQCdBQrjNFaWp0ilYlt1A4hBKebRuZA0Rai4R1wIfAsMdn3DG0jGoea2iU2frQbCcO25LQ9VEqtqMvdT07G8BbxEAXfBiOqy3NfP12t7rWp0gU7h6hRT9mPSqNfehST1fARJf2oXpBewLwMmuZBKdAZDZD'
-    @@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
+	@@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
 def handle_message()
 	client = ApiAiRuby::Client.new(
 		:client_access_token => @@ai_token,
@@ -14,20 +14,29 @@ def handle_message()
 		answer_new('I will help you')
 	elsif  apiresponce[:result][:action]=='nearest_ATM' then
 		answer_new('phgaine mesolongi')
-	elsif not self.user.pin.blank? then
-		if apiresponce[:result][:action]=='smalltalk.greetings' then
-			send_info
-		elsif apiresponce[:result][:action]=='account_balance' then
+	elsif self.user.pin then
+		a=apiresponce[:result][:action]
+		if apiresponce[:result][:speech]!='' then
+			answer_new(apiresponce[:result][:speech])
+		elsif a=='convert' then
+			if responce[:result][:parameters][:currency_name_to]=='USD' && responce[:result][:parameters][:unit_currency_from][:currency]=='EUR'
+				send_message(user, (1.12235*responce[:result][:parameters][:unit_currency_from][:amount]).to_s + ' '+responce[:result][:parameters][:unit_name_to])
+			elsif responce[:result][:parameters][:currency_name_to]=='EUR' && responce[:result][:parameters][:unit_currency_from][:currency]=='USD'
+				send_message(user, (0.89098766*responce[:result][:parameters][:unit_currency_from][:amount]).to_s+ ' '+responce[:result][:parameters][:unit_name_to])
+			else
+				send_message(user, 'I don\'t know the ' )
+			end				
+		elsif a=='smalltalk.greetings' || a=='smalltalk.agent' then
+			send_structured_message
+		elsif a=='account_balance' then
 			answer_new('Your balance is 500$')
-		elsif apiresponce[:result][:action]=='last_transactions' then
+		elsif a=='last_transactions' then
 			answer_new('last transactions: klp...')
-		elsif apiresponce[:result][:action]=='lost_card' then
+		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
 			answer_new('I will find your '+item)
-		elsif apiresponce[:result][:action]=='phone_assistance' then
+		elsif a=='phone_assistance' then
 			answer_new('I will call you')
-		elsif apiresponce[:result][:speech]!='' then
-			answer_new(apiresponce[:result][:speech])
 		end		
 
 		if apiresponce[:result][:action]=='help' then
@@ -62,9 +71,9 @@ end
 
 def send_begin()
 	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
-  		faraday.request  :url_encoded             # form-encode POST params
-  		faraday.response :logger                  # log requests to STDOUT
-  		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+		faraday.request  :url_encoded             # form-encode POST params
+		faraday.response :logger                  # log requests to STDOUT
+		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
 	end
 
 	conn.post do |req|
@@ -77,9 +86,9 @@ end
 
 def send_info()
 	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
-  		faraday.request  :url_encoded             # form-encode POST params
-  		faraday.response :logger                  # log requests to STDOUT
-  		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+		faraday.request  :url_encoded             # form-encode POST params
+		faraday.response :logger                  # log requests to STDOUT
+		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
 	end
 
 	conn.post do |req|
@@ -98,9 +107,9 @@ end
 def send_message()
 	
 	conn = Faraday.new(:url => 'https://graph.facebook.com/v2.6') do |faraday|
-  		faraday.request  :url_encoded             # form-encode POST params
-  		faraday.response :logger                  # log requests to STDOUT
-  		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+		faraday.request  :url_encoded             # form-encode POST params
+		faraday.response :logger                  # log requests to STDOUT
+		faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
 	end
 
 	conn.post do |req|
