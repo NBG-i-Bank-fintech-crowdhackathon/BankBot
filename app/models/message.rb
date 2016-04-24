@@ -65,7 +65,7 @@ def handle_sound()
 	File.delete(filename) if File.exist?(filename)
 end
 
-def handle_sound()
+def handle_location()
 	answer_new('pira location')
 end
 
