@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'faraday'
 gem 'api-ai-ruby'
 gem 'geokit-rails'
+gem 'speechmatics'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
