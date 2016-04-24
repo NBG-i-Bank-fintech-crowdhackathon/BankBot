@@ -13,7 +13,7 @@ def handle_message()
 	if apiresponce[:result][:action]=='help' then
 		answer_new('I will help you')
 	elsif  apiresponce[:result][:action]=='nearest_ATM' then
-		answer_new('phgaine mesolongi')
+		answer_new('Plase send me your location')
 	elsif self.user.pin then
 		a=apiresponce[:result][:action]
 		if apiresponce[:result][:speech]!='' then
@@ -63,6 +63,10 @@ def handle_sound()
 	end
 	# file = File.new filename
 	File.delete(filename) if File.exist?(filename)
+end
+
+def handle_sound()
+	answer_new('pira location')
 end
 
 def answer_new(text)
