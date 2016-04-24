@@ -19,8 +19,9 @@ def handle_message()
 
 	if apiresponce[:result][:action]=='input.unknown' then
 		@@unknown_count+=1
-		if @@unknown_count>=2
+		if @@unknown_count>=2 then
 			send_info
+		end
 	else
 		@@unknown_count=0
 	end
