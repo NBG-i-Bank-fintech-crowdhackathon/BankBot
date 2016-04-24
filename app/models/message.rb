@@ -74,7 +74,10 @@ def handle_message()
 		elsif a=='phone_assistance' then
 			answer_new('A bank employee will call you soon')
 		elsif a=='send_money' then
-			puts apiresponce
+			amount = apiresponce[:result][:parameters][:unit_currency][:amount]
+			currency = apiresponce[:result][:parameters][:unit_currency][:currency]
+			iban = s.scan(/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]?{0,16}/)[0]
+			answer_new("You have successfully sended #{amount} #{currency} to #{iban}")
 		end	
 	else
 		send_begin()
