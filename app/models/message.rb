@@ -4,6 +4,11 @@ class Message < ActiveRecord::Base
 	belongs_to :user
 	@@fb_token = 'CAAW46Pf7Xo4BANlo4Unadya2BeLtUt3CO5hohlqPbn1ZCrLwbGwKQCdBQrjNFaWp0ilYlt1A4hBKebRuZA0Rai4R1wIfAsMdn3DG0jGoea2iU2frQbCcO25LQ9VEqtqMvdT07G8BbxEAXfBiOqy3NfP12t7rWp0gU7h6hRT9mPSqNfehST1fARJf2oXpBewLwMmuZBKdAZDZD'
 	@@ai_token = 'e5e7bff08d9e488e80519a300cc3d9d6'
+
+def range (min, max)
+    rand * (max-min) + min
+end
+
 def handle_message()
 	client = ApiAiRuby::Client.new(
 		:client_access_token => @@ai_token,
@@ -29,7 +34,7 @@ def handle_message()
 		elsif a=='smalltalk.greetings' || a=='smalltalk.agent' then
 			send_structured_message
 		elsif a=='account_balance' then
-			answer_new('Your balance is 500$')
+			answer_new("Your balance is #{range(100.0, 10000.0)} EUR")
 		elsif a=='last_transactions' then
 			answer_new('last transactions: klp...')
 		elsif a=='lost_card' then
@@ -84,7 +89,7 @@ def send_begin()
 	conn.post do |req|
 		req.url '/me/messages?access_token=' + @@fb_token
 		req.headers['Content-Type'] = 'application/json'
-		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Authenticate with NBG\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
+		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Welcome, in order to begin please authenticate with NBG\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
 	end
 	puts "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"attachment\" : {\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"Please authenticate with NBG first.\",\"buttons\":[{\"type\":\"web_url\",\"title\":\"Authenticate\",\"url\":\"https://nbgbot.herokuapp.com/auth?uid=#{self.user.id}\"}]}} } }"
 end
