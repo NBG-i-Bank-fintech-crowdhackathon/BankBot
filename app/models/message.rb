@@ -66,7 +66,8 @@ def handle_sound()
 end
 
 def handle_location(lat, long)
-	answer_new( Atm.within(1000000, :origin => [lat, long] ).order('distance ASC').first.name )
+	atm = Atm.within(1000000, :origin => [lat, long] ).order('distance ASC').first
+	answer_new( 'Nearest ATM is ' + atm.name + ' at ' + atm.address )
 end
 
 def answer_new(text)
