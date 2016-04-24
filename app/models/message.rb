@@ -53,7 +53,7 @@ def handle_message()
 		elsif a=='savings_per_month' then
 			amount = apiresponce[:result][:parameters][:unit_currency][:amount]
 			currency = apiresponce[:result][:parameters][:unit_currency][:currency]
-			interval = apiresponce[:result][:parameters][:unit_currency][:interval]
+			interval = apiresponce[:result][:parameters][:interval]
 			answer_new("From now on you will save #{amount} #{currency} every #{interval}")
 		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
