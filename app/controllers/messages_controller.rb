@@ -54,11 +54,11 @@ class MessagesController < ApplicationController
       #req.body = '{ "name": "Unagi" }'
     end
     atms = JSON.parse atms.body
-    puts atms
-    atms[:atms].each do |atm| 
-      Atm.create(name: atm[:name], address: atm[:address][:line_2], lat: atm[:location][:latitude], long: atm[:location][:longitude])
+    if atms[:atms] then
+      atms[:atms].each do |atm| 
+        Atm.create(name: atm[:name], address: atm[:address][:line_2], lat: atm[:location][:latitude], long: atm[:location][:longitude])
+      end
     end
-  
     render plain: "Ok"
   end
 
