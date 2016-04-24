@@ -27,7 +27,7 @@ def handle_message()
 	end
 
 	if apiresponce[:result][:action]=='help' then
-		answer_new('I will help you')
+		send_info
 	elsif  apiresponce[:result][:action]=='nearest_ATM' then
 		answer_new('Plase send me your location')
 	elsif self.user.pin then
@@ -68,11 +68,13 @@ def handle_message()
 			answer_new("From now on you will save #{amount} #{currency} every #{interval}")
 		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
-			answer_new('I will find your '+item)
+			answer_new('You have successfully reported a lost '+item)
+		elsif a=='lost_password' then
+			answer_new('For password recovery follow the link: https://nbgbot.herokuapp.com/passwordrecovery')
 		elsif a=='phone_assistance' then
-			answer_new('I will call you')
-		elsif  apiresponce[:result][:action]=='nearest_ATM' then
-			answer_new('phgaine mesolongi')
+			answer_new('A bank employee will call you soon')
+		elsif a=='send_money' then
+			puts apiresponce
 		end	
 	else
 		send_begin()
