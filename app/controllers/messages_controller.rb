@@ -38,7 +38,7 @@ class MessagesController < ApplicationController
   end
 
   def store_atms
-    conn = Faraday.new(:url => 'https://nbgdemo.azure-api.net/nodeopenapi/api') do |faraday|
+    conn = Faraday.new(:url => 'https://nbgdemo.azure-api.net/') do |faraday|
           faraday.request  :url_encoded             # form-encode POST params
           faraday.response :logger                  # log requests to STDOUT
           faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
@@ -47,7 +47,7 @@ class MessagesController < ApplicationController
 
 
     atms = conn.get do |req|
-      req.url '/atms/rest'
+      req.url '/nodeopenapi/api/atms/rest'
       req.options.timeout = 5           # open/read timeout in seconds
       req.options.open_timeout = 2      # connection open timeout in seconds
       req.headers[' Ocp-Apim-Subscription-Key '] = @@nbg_token
