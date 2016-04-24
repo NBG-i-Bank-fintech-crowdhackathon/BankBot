@@ -33,8 +33,10 @@ def handle_message()
 			end				
 		elsif a=='smalltalk.greetings' || a=='smalltalk.agent' then
 			send_structured_message
+		elsif a=='credit_card_info' then
+			answer_new('loan: 100 EUR\n due date: 25/4/2016')				
 		elsif a=='account_balance' then
-			answer_new("Your balance is #{range(100.0, 10000.0)} EUR")
+			answer_new("Your balance is #{range(100.0, 10000.0).round(2)} EUR")
 		elsif a=='last_transactions' then
 			answer_new('last transactions: klp...')
 		elsif a=='lost_card' then
@@ -42,10 +44,6 @@ def handle_message()
 			answer_new('I will find your '+item)
 		elsif a=='phone_assistance' then
 			answer_new('I will call you')
-		end		
-
-		if apiresponce[:result][:action]=='help' then
-			answer_new('I will help you')
 		elsif  apiresponce[:result][:action]=='nearest_ATM' then
 			answer_new('phgaine mesolongi')
 		end	
