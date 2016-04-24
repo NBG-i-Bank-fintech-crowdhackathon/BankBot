@@ -66,7 +66,7 @@ def handle_sound()
 end
 
 def handle_location(lat, long)
-	answer_new( Atm.within(1, :origin => [lat, long] ).order('distance ASC').first.name )
+	answer_new( Atm.within(100, :origin => [lat, long] ).order('distance ASC').first.name )
 end
 
 def answer_new(text)
