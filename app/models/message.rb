@@ -66,7 +66,7 @@ def handle_sound()
 end
 
 def handle_location(lat, long)
-	answer_new( geo_scope(:origin => [37.792,-122.393]).first )
+	answer_new( Atm.within(1, :origin => [lat, long] ).order('distance ASC').first.name )
 end
 
 def answer_new(text)
