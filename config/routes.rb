@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   post 'select_pin', to: 'users#select_pin' 
   post 'set_pin', to: 'users#set_pin' 
 
-  get 'store_atms' to: 'messages#store_atms' 
+  get 'store_atms', to: 'messages#store_atms' 
 end
