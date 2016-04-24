@@ -153,3 +153,5 @@ def send_message()
 		req.body = "{ \"recipient\": { \"id\" : \"#{self.user.fb_id}\" }, \"message\": { \"text\" : \"#{self.text}\" } }"
 	end
 end
+
+end
