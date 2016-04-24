@@ -76,7 +76,7 @@ def handle_message()
 		elsif a=='send_money' then
 			amount = apiresponce[:result][:parameters][:unit_currency][:amount]
 			currency = apiresponce[:result][:parameters][:unit_currency][:currency]
-			iban = apiresponce[:result][:resolvedQuery] scan(/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]?{0,16}/)[0]
+			iban = apiresponce[:result][:resolvedQuery].scan(/[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}[a-zA-Z0-9]?{0,16}/)[0]
 			answer_new("You have successfully sended #{amount} #{currency} to #{iban}")
 		end	
 	else
