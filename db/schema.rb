@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20160424074418) do
   create_table "atms", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "lat"
-    t.string   "long"
+    t.float    "lat"
+    t.float    "long"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
