@@ -34,11 +34,15 @@ def handle_message()
 		elsif a=='smalltalk.greetings' || a=='smalltalk.agent' then
 			send_structured_message
 		elsif a=='credit_card_info' then
-			answer_new('loan: 100 EUR\n due date: 25/4/2016')				
+			answer_new('Loan: 100 EUR\nDue date: 25/4/2016')				
 		elsif a=='account_balance' then
 			answer_new("Your balance is #{range(100.0, 10000.0).round(2)} EUR")
 		elsif a=='last_transactions' then
-			answer_new('last transactions: klp...')
+			answer_new('Last Transactions:')
+			answer_new('20/04/2016 19:45:03\ndeposit: 560.00 EUR')
+			answer_new('20/04/2016 23:13:13\nwithdraw: 400.00 EUR')
+			answer_new('21/04/2016 07:45:57\nwithdraw: 26.78 EUR')
+			answer_new('22/04/2016 19:43:34\ndeposit: 100.00 EUR')
 		elsif a=='lost_card' then
 			item = apiresponce[:result][:parameters][:lost_items]
 			answer_new('I will find your '+item)
