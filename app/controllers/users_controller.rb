@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
   def set_pin
     u = User.find(params[:uid])
-    u.update(pin: params[:pin])
+    u.update(pin: params[:user][:pin])
     u.save
     u.messages.last.send_info
     render 'success_auth'
