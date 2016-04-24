@@ -5,6 +5,7 @@ class CreateAtms < ActiveRecord::Migration
       t.string :address
       t.float :lat
       t.float :long
+      t.float :distance
 
       t.timestamps null: false
     end
